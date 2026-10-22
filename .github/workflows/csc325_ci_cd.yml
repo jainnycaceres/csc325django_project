@@ -1,0 +1,65 @@
+name: CI/CD for CSC325 Django Project
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  setup:
+    name: Setup
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+  dependencies:
+    name: Dependencies
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install django
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: dependencies
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install django
+
+      - name: Run tests
+        run: |
+          python manage.py test
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Deployment placeholder
+        run: echo "Tests passed. Configure the actual deployment here."
