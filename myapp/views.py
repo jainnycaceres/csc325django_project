@@ -8,3 +8,5 @@ def home(request):
 
 def about(request):
     return HttpResponse("<h1>About Page</h1><p>This is the about page of the simple Django application.</p>")
+
+# Small Update to test the CI/CD pipeline.
